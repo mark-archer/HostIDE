@@ -1,0 +1,55 @@
+
+load
+	"host/base"
+
+;runTests!
+
+var ncnt 0
+var neurons (,)
+type Neuron: fields threshold=1 value=0 active=false isInput=false isOutput=false id[Int]
+set Neuron.new : fn(n)
+	; set id and add to neurons
+	if(not n.id)
+		set ncnt : + ncnt 1
+		set n.id ncnt
+	push neurons n
+	n
+
+var scnt 0
+var synapses (,)
+type Synapse: fields source[Neuron] target[Neuron] weight=1 id[Id]
+set Synapse.new : fn(s)
+	if(not s.id)
+		set scnt : + scnt 1
+		set s.id scnt
+	push synapses s
+	s
+
+for(i 5)
+    new Neuron
+for(i 4)
+    var n neurons.`i
+    var n2 neurons.(+ i 1)
+    new Synapse n n2
+
+set neurons.0.active true
+
+
+fn annStep()
+	;; part 1 -- update internal values
+	each neurons n
+	    set n.value 0
+	each synapses s
+	    if s.source.active
+	        set s.target.value : + s.target.value s.weight
+
+	;; part 2 -- update active state
+	each neurons n
+	    set n.active : >= n.value n.threshold
+
+	;; part 3 -- update incorrect predictors
+
+	map neurons n: + n.id ": " : + 0 n.active
+
+
+

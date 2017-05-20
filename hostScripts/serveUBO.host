@@ -1,0 +1,19 @@
+
+;runTests!
+load "host/base/"
+load "host/fs/"
+load "host/http/serve.host"
+;load "host/hostlang/html/html.host"
+
+serve!
+addRoute : fn defaultView(args)
+	push context args
+	return : readFile "./public/UBO.html"
+
+addRoute: fn publicFiles(args)
+	var url : toLower args.url
+	if (== (substr url 0 8) "/public/")
+		return : sendFile args : add "." args.url
+	false
+
+"UBO ready"

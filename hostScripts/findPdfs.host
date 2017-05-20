@@ -1,0 +1,46 @@
+load /base/string
+load /nodejs/http
+load /html/jQuery
+
+fn getLinks(url)
+	http.get url
+	jQuery.find _ "a"
+	, each a
+		var link : jQuery.attr a "href"
+		if (endsWith link ".pdf") link
+		else ""
+	, compact
+
+var links : getLinks "http://www.cbinet.com/pc17246"
+
+fn mutateLink(link)
+	set link : add "http://www.cbinet.com" link
+	var linksFound list!
+	var ptrn : string.match link """\(\d+\)\.pdf"""
+	if(not ptrn)
+		push linksFound link
+		set ptrn ".pdf"
+	var misses 0
+	for(i 1 20)
+		var test
+			string.replace link ptrn : add "(" i ").pdf"
+		var valid : http.testUrl test
+		log valid test
+		if valid
+			push linksFound test
+		else
+			set misses : add misses 1
+			if (> misses 3)
+				break!
+	linksFound
+
+
+var linksFound list!
+each links l
+	mutateLink l
+	, log
+	append linksFound _
+
+linksFound
+
+

@@ -1,0 +1,41 @@
+{
+  "name": "Host",
+  "description": "A programming language programming language",
+  "version": "0.0.1",
+  "author": "Mark Archer",
+  "license": "UNLICENSED",
+  "main": "main.js",
+  "dependencies": {
+    "node-uuid": "^1.4.7",
+    "underscore": "^1.8.3"
+  },
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mark-archer/host"
+  },
+  "bugs": {
+    "url": "https://github.com/mark-archer/host/issues"
+  },
+  "keywords": [
+    "host",
+    "hostlang"
+  ],
+  "homepage": "https://hostlang.io",
+  "devDependencies": {
+    "electron": "^1.4.8"
+  },
+  "build": {
+    "appId": "host",
+    "asarUnpack":[
+      "hostlang/**"
+    ]
+  },
+  "scripts": {
+    "pack": "build --dir",
+    "dist": "build"
+  }
+}

@@ -1,0 +1,35 @@
+
+var cleanPath: evalJs """function(path){return path.replace(/\\/g,"/");}"""
+var sort : evalJs "function(ary){return _.clone(ary).sort();};"
+var replace string.replace
+var match string.match
+
+
+var paths
+	if(exists paths)
+		paths
+	else
+		walk """C:\Users\mark_\SharePoint\Regeneron - Documents"""
+		>> each p: cleanPath p
+
+filter paths p: OR
+	match p "MARK12"
+	match p "YOGA"
+	match p "BD6GADE1"
+
+
+return : list _.length _
+
+
+each paths p
+	null
+	if(match p "-MARKYOGA3")
+		var p2 : replace p "-MARKYOGA3" ""
+		null
+		if(fileExists p2)
+			if(fileEqual p p2)
+				p
+			else
+				list "Not equal: " p p2
+>> compact
+;>> each f: deleteFile f

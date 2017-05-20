@@ -1,0 +1,11 @@
+
+load "host/http"
+
+run "./hostScripts/ann.host" 
+
+
+;new Neuron
+
+annStep!
+
+map neurons n: + n.id ": " : + 0 n.active

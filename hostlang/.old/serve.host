@@ -1,0 +1,88 @@
+;load "./hostlang/base/string.host"
+
+var Route : new Type id="Route" name="Route"
+export Route
+
+var routes list!
+push routes : new Route: fn handler(args) "Hello Host!"
+export routes
+
+fn serve ()
+
+    var tokens new!
+
+    var Token : new Type id="Token" name="Token"
+    ;_knownTypes >> push Token
+
+    fn inGroup(item group)
+        if(== group "@Any")
+            return true
+        false
+
+    fn globalHandler(args)
+        load "./hostlang/base/string.host"
+        context >> push args
+        ;log req res token verb url
+        log : add "global handler called -- " date!
+
+        reverse routes
+        >> each r
+            if(AND
+                (string.match  url    (OR r.route "."))
+                (string.match  verb   (OR r.verb  "."))
+                (inGroup       token  (OR r.group "@Any")))
+
+                return : r.handler args
+                ;return : list "route found" r
+
+        "TODO: 404"
+
+    evalJs """
+        function(expr, context, callback){
+            var tokens = expr[0];
+            var globalHandler = expr[1];
+
+            //console.log(host, context);
+            var cout = context[0].cout;
+            var http = require('http');
+            var uuid = require('node-uuid');
+            var Cookies = require('cookies');
+
+            var server = http.createServer(function (req, res) {
+                cout('request received: ' + (new Date()));
+
+                var cookies = new Cookies(req, res);
+                var host_token = cookies.get('host_token');
+                host_token = tokens[host_token];
+                if(!host_token){
+                    host_token = uuid.v4();
+                    tokens[host_token] = {id:host_token,type:'Token',authenticated:false,issDT:Date.now()};
+                    cookies.set('host_token',host_token);
+                    host_token = tokens[host_token];
+                }
+
+
+                var verb = req.method;
+                var url = req.url;
+                var postData; // todo: post data
+
+                var ctx = _.clone(context);
+                var args = {req:req,res:res,token:host_token,verb:verb,url:url};
+                //return res.end('hello host');
+                host.evalHost(['`', globalHandler, args], ctx, function(rslt){
+                    //return res.end('hello host');
+                    rslt = host.utils.toJSON(rslt);
+                    rslt = JSON.stringify(rslt);
+                    res.end(rslt);
+                });
+            });
+            var port = 8080;
+            server.listen(port);
+            callback('server listening on port ' + port);
+        }
+    """
+    _ tokens globalHandler
+    log "server listening at: <a href='http://localhost:8080' target='_blank'>http://localhost:8080</a>"
+
+set serve.useRuntimeScope true
+export serve
