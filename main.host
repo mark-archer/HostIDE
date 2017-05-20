@@ -1,10 +1,7 @@
 
-load "host/base"
 
 run "./hostScripts/ann.host" 
 
-
-;new Neuron
 
 annStep!
 
@@ -14,3 +11,5 @@ map (range 10 20) n
         if(> n 15) n
         elif(> n 13): + n 5
         else n
+        
+(1 2 3)
