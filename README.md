@@ -8,6 +8,8 @@ This is built using electron.  It probably makes more sense to do this as an ato
     for documentation see: https://github.com/electron-userland/electron-builder
 
 ## hot keys
+    alt+p
+        parse code and show resulting AST
     alt+r
         run code
     ctrl+r
