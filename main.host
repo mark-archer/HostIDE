@@ -1,5 +1,5 @@
 
-load "host/http"
+load "host/base"
 
 run "./hostScripts/ann.host" 
 
@@ -9,3 +9,8 @@ run "./hostScripts/ann.host"
 annStep!
 
 map neurons n: + n.id ": " : + 0 n.active
+
+map (range 10 20) n
+        if(> n 15) n
+        elif(> n 13): + n 5
+        else n
