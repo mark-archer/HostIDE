@@ -1,15 +1,14 @@
-
 load "host/base"
 
 var replace string.replace
 "
 ######################################################################################
-## %i.%j - 
+## %i.%j -
 ######################################################################################
 
 # todo
 
-" >>> var tmpl 
+" >>> var tmpl
 var str ""
 for (i 10 77): for (j 1 4)
 	replace tmpl "%i" i
@@ -17,17 +16,3 @@ for (i 10 77): for (j 1 4)
 	set str : add str _
 
 return str
-
-run "./hostScripts/ann.host" 
-
-
-annStep!
-
-map neurons n: + n.id ": " : + 0 n.active
-
-map (range 10 20) n
-        if(> n 15) n
-        elif(> n 13): + n 5
-        else n
-        
-(1 2 3)
