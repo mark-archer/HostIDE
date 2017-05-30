@@ -18,7 +18,7 @@ This is built using electron.  It probably makes more sense to do this as an ato
     alt+r
         run code
     ctrl+r
-        reload idea
+        reload IDE
     ctrl+enter
         run selected text 
         or current line if no text is selected
