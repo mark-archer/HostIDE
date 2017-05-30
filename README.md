@@ -26,6 +26,8 @@ This is built using electron.  It probably makes more sense to do this as an ato
         swap current line with line above
     alt+shift+downarrow
         swap current line with line below
+    alt+c
+        clear output pane
         
 ## To build as standalone electron app     
     npm run dist
