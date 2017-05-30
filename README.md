@@ -5,6 +5,7 @@ This is built using electron.  It probably makes more sense to do this as an ato
 
 ## Getting Started 
     git clone https://github.com/mark-archer/HostIDE
+    cd HostIDE
     npm -g install electron 
     npm install
     
