@@ -1,11 +1,15 @@
 # HostIDE
 A simple standalone IDE for Host language
     
-This is built using electron.  It probably makes more sense to do this as an atom plugin but this is what it is for now. 
+This is built using electron.  It probably makes more sense to do this as an atom plugin but this is what it is for now.
 
-## To build electron
-    run "npm run dist"
-    for documentation see: https://github.com/electron-userland/electron-builder
+## to install dependencies 
+    ; should only need to be done once
+    npm -g install electron 
+    npm install
+    
+## To start IDE
+    electron .
 
 ## hot keys
     alt+p
@@ -22,6 +26,10 @@ This is built using electron.  It probably makes more sense to do this as an ato
     alt+shift+downarrow
         swap current line with line below
         
+## To build as standalone app electron    
+    npm run dist
+    ; for electron documentation see: https://github.com/electron-userland/electron-builder
+
 ## todo
 - syntax highlighting 
 - code completion
