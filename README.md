@@ -27,7 +27,7 @@ This is built using electron.  It probably makes more sense to do this as an ato
     alt+shift+downarrow
         swap current line with line below
         
-## To build as standalone app electron    
+## To build as standalone electron app     
     npm run dist
     ; for electron documentation see: https://github.com/electron-userland/electron-builder
 
