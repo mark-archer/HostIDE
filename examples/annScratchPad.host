@@ -1,0 +1,26 @@
+
+
+run "./examples/ann.host"
+
+annTTT!
+
+;annStep doInput, printP!
+
+filter neurons n: n.isInput
+>>> var inputs
+map inputs n : printN n
+
+var board new!
+for(y 2): for (x 2)
+	var i <<
+		* y 3
+		>> + x
+		>> * 3
+	var blank inputs.(one i)
+	var p1 inputs.(+ i 1)
+	var p2 inputs.(+ i 2)
+	set board.`y.`x.blank blank
+	set board.`y.`x.p1 p1
+	set board.`y.`x.p2 p2
+	set board.`y.`x.i i
+board
