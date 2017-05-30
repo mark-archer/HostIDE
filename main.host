@@ -1,33 +1,33 @@
 
-load "host/base"
 
-var replace string.replace
-"
-######################################################################################
-## %i.%j - 
-######################################################################################
+run "./examples/ann.host" 
 
-# todo
+;*
+set neurons.0.ival 0
+fn doInput()
+	set neurons.0.ival : mod (+ neurons.0.ival 1) 5
+	set neurons.0.active : not neurons.0.ival
+*;
 
-" >>> var tmpl 
-var str ""
-for (i 10 77): for (j 1 4)
-	replace tmpl "%i" i
-	>> replace "%j" j
-	set str : add str _
+annTTT!
 
-return str
+;annStep doInput, printP!
 
-run "./hostScripts/ann.host" 
+filter neurons n: n.isInput
+>>> var inputs
+map inputs n : printN n
 
-
-annStep!
-
-map neurons n: + n.id ": " : + 0 n.active
-
-map (range 10 20) n
-        if(> n 15) n
-        elif(> n 13): + n 5
-        else n
-        
-(1 2 3)
+var board new!
+for(y 2): for (x 2)
+	var i << 
+		* y 3
+		>> + x
+		>> * 3	
+	var blank inputs.(one i)
+	var p1 inputs.(+ i 1)
+	var p2 inputs.(+ i 2)
+	set board.`y.`x.blank blank
+	set board.`y.`x.p1 p1
+	set board.`y.`x.p2 p2
+	set board.`y.`x.i i	
+board

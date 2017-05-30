@@ -1,3 +1,7 @@
+;;; use a string template to generate a bigger string ;;;
+; this particular example is just generating a long list of section headers
+; as comments in R
+
 load "host/base"
 
 var replace string.replace

@@ -6,12 +6,13 @@
   "license": "UNLICENSED",
   "main": "main.js",
   "dependencies": {
+    "hostlang": "0.0.8",
     "node-uuid": "^1.4.7",
     "underscore": "^1.8.3"
   },
   "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pack": "build --dir",
+    "dist": "build"
   },
   "repository": {
     "type": "git",
@@ -30,12 +31,8 @@
   },
   "build": {
     "appId": "host",
-    "asarUnpack":[
+    "asarUnpack": [
       "hostlang/**"
     ]
-  },
-  "scripts": {
-    "pack": "build --dir",
-    "dist": "build"
   }
 }

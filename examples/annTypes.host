@@ -1,0 +1,28 @@
+
+load
+	"host/base"
+
+
+;;; Neuron Type ;;;
+var ncnt 0
+var neurons (,)
+type Neuron: fields threshold=1 value=0 active=false id[Int]
+set Neuron.new : fn(n)
+	; set id and add to neurons
+	if(not n.id)
+		set n.id ncnt
+		set ncnt : + ncnt 1
+	push neurons n
+	n
+
+
+;;; Synapse Type ;;;
+var scnt 0
+var synapses (,)
+type Synapse: fields source[Neuron] target[Neuron] weight=1 id[Id] active[Bool]=false active1[Bool]=false
+set Synapse.new : fn(s)
+	if(not s.id)
+		set s.id scnt
+		set scnt : + scnt 1
+	push synapses s
+	s

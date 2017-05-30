@@ -1,15 +1,21 @@
 
-;runTests!
 load "host/base/"
 load "host/fs/"
 load "host/http/serve.host"
-;load "host/hostlang/html/html.host"
 
 serve!
+
+; routes are evaluated from last to first
+; if a route fn returns anything other than a falsy value (false, null, "") then it's assumed it handled the route
+
+; this is the default route, it just returns a static html file
+; note it always returns true so any route before this will never be called
 addRoute : fn defaultView(args)
 	push context args
 	return : readFile "./public/UBO.html"
 
+; this is the route that serves any files in the public folder
+; note it returns false if the url doesn't start with "/public/"
 addRoute: fn publicFiles(args)
 	var url : toLower args.url
 	if (== (substr url 0 8) "/public/")

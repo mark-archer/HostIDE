@@ -1,6 +1,7 @@
-load /base/string
-load /nodejs/http
-load /html/jQuery
+load
+    "host/base/string.host"
+    "host/http/http.host"
+    "host/html/jQuery.host"
 
 fn getLinks(url)
 	http.get url

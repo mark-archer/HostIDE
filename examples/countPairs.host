@@ -1,0 +1,9 @@
+
+; gives the number of unique pairs (order doesn't matter) from 1 to n
+fn countPairs(n)
+	var cnt 0
+	for (i 1 n)
+		for (j 1 (- i 1) 1)
+			set cnt : + cnt 1
+	cnt
+

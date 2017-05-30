@@ -1,6 +1,6 @@
 load
 	"host/base" 
-	"host/html/"
+	"host/html"
 
 ;;; Game of Life ;;;
 ;; build board

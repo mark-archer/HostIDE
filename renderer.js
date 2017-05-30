@@ -4,8 +4,11 @@
 
 //__appRoot = __dirname;
 
-var utils = require('./hostlang/utils.js');
-var host = require('./hostlang/hostlang.js');
+//var utils = require('./hostlang/utils.js');
+//var host = require('./hostlang/hostlang.js');
+
+var host = require('hostlang');
+var utils = host.utils;
 
 //console.log('renderer: ' + __dirname);
 
@@ -149,6 +152,9 @@ txtCode.onkeydown = function (evt) {
             if(lineStart < 0) lineStart = 0;
             if(lineEnd < 0) lineEnd = txt.length;
             selText = txt.substring(lineStart+1,lineEnd);
+            var nextStart = txt.substring(lineEnd).search(/\S/) + lineEnd;
+            if(nextStart > lineEnd)
+                txbx.caret(nextStart);
         }
 
         run(selText);
