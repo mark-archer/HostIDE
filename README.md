@@ -17,8 +17,6 @@ This is built using electron.  It probably makes more sense to do this as an ato
         parse code and show resulting AST
     alt+r
         run code
-    ctrl+r
-        reload IDE
     ctrl+enter
         run selected text 
         or current line if no text is selected
@@ -28,6 +26,9 @@ This is built using electron.  It probably makes more sense to do this as an ato
         swap current line with line below
     alt+c
         clear output pane
+    ctrl+r
+        reload IDE
+        
         
 ## To build as standalone electron app     
     npm run dist
