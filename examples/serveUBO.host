@@ -1,4 +1,7 @@
 
+;;; example of an http server ;;;
+; note this doesn't work because out-of-the-box because "./public/UBO.html" is missing
+
 load "host/base/"
 load "host/fs/"
 load "host/http/serve.host"
