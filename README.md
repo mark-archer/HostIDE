@@ -3,8 +3,8 @@ A simple standalone IDE for Host language
     
 This is built using electron.  It probably makes more sense to do this as an atom plugin but this is what it is for now.
 
-## to install dependencies 
-    ; should only need to be done once
+## Getting Started 
+    git clone https://github.com/mark-archer/HostIDE
     npm -g install electron 
     npm install
     
