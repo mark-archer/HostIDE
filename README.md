@@ -27,7 +27,7 @@ This is built using electron.  It probably makes more sense to do this as an ato
     alt+c
         clear output pane
     ctrl+r
-        reload IDE
+        restart IDE
         
         
 ## To build as standalone electron app     
