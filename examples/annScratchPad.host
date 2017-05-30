@@ -2,6 +2,13 @@
 
 run "./examples/ann.host"
 
+;*
+set neurons.0.ival 0
+fn doInput()
+	set neurons.0.ival : mod (+ neurons.0.ival 1) 5
+	set neurons.0.active : not neurons.0.ival
+*;
+
 annTTT!
 
 ;annStep doInput, printP!

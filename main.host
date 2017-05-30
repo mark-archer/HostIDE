@@ -1,33 +1,51 @@
+;;; this is copied from ./examples/GameOfLife.host ;;;
 
+load
+	"host/base"
+	"host/html"
 
-run "./examples/ann.host" 
-
-;*
-set neurons.0.ival 0
-fn doInput()
-	set neurons.0.ival : mod (+ neurons.0.ival 1) 5
-	set neurons.0.active : not neurons.0.ival
-*;
-
-annTTT!
-
-;annStep doInput, printP!
-
-filter neurons n: n.isInput
->>> var inputs
-map inputs n : printN n
-
+;;; Game of Life ;;;
+;; build board
+var size 10
+var initOneIn 3
 var board new!
-for(y 2): for (x 2)
-	var i << 
-		* y 3
-		>> + x
-		>> * 3	
-	var blank inputs.(one i)
-	var p1 inputs.(+ i 1)
-	var p2 inputs.(+ i 2)
-	set board.`y.`x.blank blank
-	set board.`y.`x.p1 p1
-	set board.`y.`x.p2 p2
-	set board.`y.`x.i i	
-board
+for(row size): for(col size)
+	var cell : new name="cell" row=row col=col class="cell-dead"
+	set board.`row.`col cell
+	set cell.alive : == 0 : random initOneIn
+	set cell.class : OR (AND cell.alive "cell-alive") "cell-dead"
+
+;; count a cells neighbors
+fn countNeighbors(cell)
+	var cnt 0
+	for(rowOff -1 1): for(colOff -1 1)
+		if(AND (== rowOff 0) (== colOff 0)) continue!
+		if board.(+ rowOff cell.row).(+ colOff cell.col).alive
+			set cnt : + cnt 1
+	cnt
+
+;; update board
+interval 2000 : fn()
+
+	; count all neighbors
+	var neighbors new!
+	for(row size): for(col size)
+		var cell board.`row.`col
+		var cnt : countNeighbors cell
+		set neighbors.`row.`col.cnt cnt
+
+	; update board with next generation
+	for(row size): for(col size)
+		var cell board.`row.`col
+		var cnt neighbors.`row.`col.cnt
+		set cell.alive : <<
+			if cell.alive
+				in cnt (, 2 3)
+			else
+				== cnt 3
+		set cell.class : OR (AND cell.alive "cell-alive") "cell-dead"
+
+;; build and bind html from board
+table: ` each (range size) row
+	tr: ` each (range size) col
+		td: bind class board.`row.`col.class
