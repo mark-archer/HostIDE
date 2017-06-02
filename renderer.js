@@ -43,6 +43,8 @@ function log(rslt, isError) {
     }
 
     $(divResults).prepend(pre);
+
+    return rslt;
 }
 ctx.cout = log;
 function error(err){
