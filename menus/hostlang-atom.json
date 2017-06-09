@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle hostlang-atom",
+        "command": "hostlang-atom:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "hostlang-atom",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "hostlang-atom:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

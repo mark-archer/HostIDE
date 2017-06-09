@@ -1,5 +1,4 @@
 node_modules
-dist
 .idea
-hostlang
-xhostlang
+.DS_Store
+npm-debug.log

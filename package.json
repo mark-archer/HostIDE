@@ -1,36 +1,18 @@
 {
-  "name": "Host",
-  "description": "A programming language programming language",
-  "version": "0.0.1",
-  "author": "Mark Archer",
-  "license": "UNLICENSED",
-  "main": "main.js",
-  "dependencies": {
-    "hostlang": "0.0.8"
-  },
-  "scripts": {
-    "pack": "build --dir",
-    "dist": "build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mark-archer/host"
-  },
-  "bugs": {
-    "url": "https://github.com/mark-archer/host/issues"
-  },
+  "name": "hostlang-atom",
+  "main": "./lib/hostlang-atom",
+  "version": "0.0.0",
+  "description": "A short description of your package",
   "keywords": [
-    "host",
-    "hostlang"
   ],
-  "homepage": "https://hostlang.io",
-  "devDependencies": {
-    "electron": "^1.4.8"
+  "activationCommands": {
+    "atom-workspace": "hostlang-atom:toggle"
   },
-  "build": {
-    "appId": "host",
-    "asarUnpack": [
-      "hostlang/**"
-    ]
+  "repository": "https://github.com/atom/hostlang-atom",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
   }
 }
