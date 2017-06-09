@@ -1,44 +1,44 @@
 'use babel';
 
-import HostlangAtom from '../lib/hostlang-atom';
+import Hostide from '../lib/hostide';
 
 // Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 //
 // To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
 // or `fdescribe`). Remove the `f` to unfocus the block.
 
-describe('HostlangAtom', () => {
+describe('Hostide', () => {
   let workspaceElement, activationPromise;
 
   beforeEach(() => {
     workspaceElement = atom.views.getView(atom.workspace);
-    activationPromise = atom.packages.activatePackage('hostlang-atom');
+    activationPromise = atom.packages.activatePackage('hostide');
   });
 
-  describe('when the hostlang-atom:toggle event is triggered', () => {
+  describe('when the hostide:toggle event is triggered', () => {
     it('hides and shows the modal panel', () => {
       // Before the activation event the view is not on the DOM, and no panel
       // has been created
-      expect(workspaceElement.querySelector('.hostlang-atom')).not.toExist();
+      expect(workspaceElement.querySelector('.hostide')).not.toExist();
 
       // This is an activation event, triggering it will cause the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'hostlang-atom:toggle');
+      atom.commands.dispatch(workspaceElement, 'hostide:toggle');
 
       waitsForPromise(() => {
         return activationPromise;
       });
 
       runs(() => {
-        expect(workspaceElement.querySelector('.hostlang-atom')).toExist();
+        expect(workspaceElement.querySelector('.hostide')).toExist();
 
-        let hostlangAtomElement = workspaceElement.querySelector('.hostlang-atom');
-        expect(hostlangAtomElement).toExist();
+        let hostideElement = workspaceElement.querySelector('.hostide');
+        expect(hostideElement).toExist();
 
-        let hostlangAtomPanel = atom.workspace.panelForItem(hostlangAtomElement);
-        expect(hostlangAtomPanel.isVisible()).toBe(true);
-        atom.commands.dispatch(workspaceElement, 'hostlang-atom:toggle');
-        expect(hostlangAtomPanel.isVisible()).toBe(false);
+        let hostidePanel = atom.workspace.panelForItem(hostideElement);
+        expect(hostidePanel.isVisible()).toBe(true);
+        atom.commands.dispatch(workspaceElement, 'hostide:toggle');
+        expect(hostidePanel.isVisible()).toBe(false);
       });
     });
 
@@ -51,11 +51,11 @@ describe('HostlangAtom', () => {
       // workspaceElement to the DOM are generally slower than those off DOM.
       jasmine.attachToDOM(workspaceElement);
 
-      expect(workspaceElement.querySelector('.hostlang-atom')).not.toExist();
+      expect(workspaceElement.querySelector('.hostide')).not.toExist();
 
       // This is an activation event, triggering it causes the package to be
       // activated.
-      atom.commands.dispatch(workspaceElement, 'hostlang-atom:toggle');
+      atom.commands.dispatch(workspaceElement, 'hostide:toggle');
 
       waitsForPromise(() => {
         return activationPromise;
@@ -63,10 +63,10 @@ describe('HostlangAtom', () => {
 
       runs(() => {
         // Now we can test for view visibility
-        let hostlangAtomElement = workspaceElement.querySelector('.hostlang-atom');
-        expect(hostlangAtomElement).toBeVisible();
-        atom.commands.dispatch(workspaceElement, 'hostlang-atom:toggle');
-        expect(hostlangAtomElement).not.toBeVisible();
+        let hostideElement = workspaceElement.querySelector('.hostide');
+        expect(hostideElement).toBeVisible();
+        atom.commands.dispatch(workspaceElement, 'hostide:toggle');
+        expect(hostideElement).not.toBeVisible();
       });
     });
   });

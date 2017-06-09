@@ -1,24 +1,2 @@
 
-;run """C:\Users\mark_\Desktop\addPBISections.host"""
-
-load "host/fs"
-
-var layoutFile """C:\Users\mark_\Desktop\DUPIXENT_monthly\Report\Layout"""
-
-; read in JSON
-read layoutFile "ucs2"
->> evalJs
->>> var pbi 
-
-; add two sections by copying and modifying the first section
-list
-"my new section 1"
-	"my new section 2"
->> each sectionName 
-	copy pbi.sections.0
-	set _.displayName sectionName
-	>>> push pbi.sections
-
-; write back to JSON
-toDataString pbi
->>> writeFile layoutFile "ucs2"
+"Hello World"

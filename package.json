@@ -1,18 +1,16 @@
 {
-  "name": "hostlang-atom",
-  "main": "./lib/hostlang-atom",
-  "version": "0.0.0",
-  "description": "A short description of your package",
-  "keywords": [
-  ],
-  "activationCommands": {
-    "atom-workspace": "hostlang-atom:toggle"
-  },
-  "repository": "https://github.com/atom/hostlang-atom",
+  "name": "HostIDE",
+  "main": "./lib/hostide",
+  "version": "0.0.1",
+  "description": "A simple IDE for hostlang",
+  "keywords": [],
+  "repository": "https://github.com/mark-archer/HostIDE",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
+    "hostlang": "0.0.9",
+    "loophole": "^1.1.0"
   }
 }

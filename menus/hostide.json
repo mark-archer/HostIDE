@@ -2,8 +2,8 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Toggle hostlang-atom",
-        "command": "hostlang-atom:toggle"
+        "label": "Parse Host Code",
+        "command": "hostide:parseHost"
       }
     ]
   },
@@ -12,11 +12,11 @@
       "label": "Packages",
       "submenu": [
         {
-          "label": "hostlang-atom",
+          "label": "hostide",
           "submenu": [
             {
-              "label": "Toggle",
-              "command": "hostlang-atom:toggle"
+              "label": "Parse",
+              "command": "hostide:parseHost"
             }
           ]
         }
