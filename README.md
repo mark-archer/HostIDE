@@ -1,7 +1,7 @@
 # HostIDE
 A simple standalone IDE for Host language
     
-This is built using electron.  It probably makes more sense to do this as an atom plugin but this is what it is for now.
+This is built using electron.  
 
 ## Getting Started 
     git clone https://github.com/mark-archer/HostIDE
@@ -34,6 +34,15 @@ This is built using electron.  It probably makes more sense to do this as an ato
     npm run dist
     ; for electron documentation see: https://github.com/electron-userland/electron-builder
 
-## todo
+## Todo
+
 - syntax highlighting 
 - code completion
+
+## Notes
+
+Building this in electron requires writing an entire editor/IDE from scratch.  I don't want to do all that work right now so I'm searching for an existing editor/IDE that I can just add language support for (code completion, and highlighting at least).
+
+I tried to do this as an atom plugin but atom doesn't like the use of eval.  I'm working to try to prevent the language from relying on eval but for now it does so that makes atom a no-go.
+
+VS Code might be a good option.

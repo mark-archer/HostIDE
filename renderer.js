@@ -7,7 +7,7 @@
 //var utils = require('./hostlang/utils.js');
 //var host = require('./hostlang/hostlang.js');
 
-var host = require('hostlang');
+var host = require('./hostlang/hostlang.js');
 var utils = host.utils;
 
 //console.log('renderer: ' + __dirname);
@@ -89,31 +89,34 @@ function getSelectionText() {
     return text;
 }
 txtCode.onkeydown = function (evt) {
+    //console.log('onkeydown');
     var caretPos = txbx.caret();
 
     // alt+r : run
-    if(evt.keyCode == 82 && evt.altKey){
+    if(evt.keyCode === 82 && evt.altKey){
+        if(evt.shiftKey) // force run
+            ctx._isRunning = false;
         run(evt.target.value);
     }
 
     // alt+p : see parse results
     //console.log(evt.keyCode);
-    if(evt.keyCode == 80 && evt.altKey){
+    if(evt.keyCode === 80 && evt.altKey){
         parse(evt.target.value);
     }
 
     // alt+c : clear results
-    if(evt.keyCode == 67 && evt.altKey){
+    if(evt.keyCode === 67 && evt.altKey){
         clearLog();
     }
 
     // alt+t : run tests
-    if(evt.keyCode == 84 && evt.altKey){
+    if(evt.keyCode === 84 && evt.altKey){
         runTests();
     }
 
     // write to main file
-    fs.writeFile(hostMainPath,evt.target.value);
+    fs.writeFile(hostMainPath,evt.target.value,_.noop);
 
     //console.log(evt);
 
