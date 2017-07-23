@@ -45,4 +45,4 @@ Building this in electron requires writing an entire editor/IDE from scratch.  I
 
 I tried to do this as an atom plugin but atom doesn't like the use of eval.  I'm working to try to prevent the language from relying on eval but for now it does so that makes atom a no-go.
 
-VS Code might be a good option.
+VS Code might be a good option.  It's pretty lightweight and has builds for all the major OSs.
