@@ -9,6 +9,7 @@
 
 var host = require('./hostlang/hostlang.js');
 var utils = host.utils;
+var hostc = require('./hostlang/hostc.js');
 
 //console.log('renderer: ' + __dirname);
 
@@ -53,6 +54,11 @@ function error(err){
 function parse(code) {
     host.parse(code, ctx, log, error);
 }
+function compile(code){
+    host.parse(code, ctx, function(expr){
+        hostc.compile(expr, null, log);
+    }, error);
+}
 function run(code) {
     host.run(code, ctx, log, error);
 }
@@ -89,7 +95,7 @@ function getSelectionText() {
     return text;
 }
 txtCode.onkeydown = function (evt) {
-    //console.log('onkeydown');
+    //console.log('onkeydown',evt);
     var caretPos = txbx.caret();
 
     // alt+r : run
@@ -99,10 +105,14 @@ txtCode.onkeydown = function (evt) {
         run(evt.target.value);
     }
 
-    // alt+p : see parse results
-    //console.log(evt.keyCode);
+    // alt+p : see parse results    
     if(evt.keyCode === 80 && evt.altKey){
         parse(evt.target.value);
+    }
+
+    // alt+j : see hostc results    
+    if(evt.keyCode === 74 && evt.altKey){
+        compile(evt.target.value);
     }
 
     // alt+c : clear results

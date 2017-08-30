@@ -6,7 +6,8 @@
   "license": "UNLICENSED",
   "main": "main.js",
   "dependencies": {
-    "hostlang": "0.0.8"
+    "hostlang": "0.0.8",
+    "lodash": "^4.17.4"
   },
   "scripts": {
     "pack": "build --dir",
