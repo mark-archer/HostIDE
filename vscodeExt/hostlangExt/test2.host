@@ -1,0 +1,19 @@
+
+; comment
+fn test(a b c)
+    var d : a + b
+    var time date!
+    if (d > 1)
+        return 1
+    elif (d == 2)
+        return -2
+    else
+        log "not in if"
+    while false
+        log null
+    a
+
+var num 1
+var txt "some text"
+    
+test num 2 txt 

@@ -1,0 +1,105 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Host",
+	"patterns": [
+		{
+			"include": "#control"
+		},
+		{
+			"include": "#function"
+		},
+		{
+			"include": "#operator"
+		},
+		{
+			"include": "#method"
+		},
+		{
+			"include": "#variable"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#commentsBlock"
+		}
+	],
+	"repository": {
+		"control": {
+			"patterns": [{
+				"name": "keyword.control",
+				"match": "\\b(if|elif|else|while|for|return|break|next)\\b"
+			}]
+		},
+		"function": {
+			"patterns": [{
+				"name": "keyword",
+				"match": "\\b(fn|var|set|true|false|null)\\b"
+			}]
+		},
+		"operator": {
+			"patterns": [{
+				"name": "keyword.operator",
+				"match": "\\b(\\>)\\b"
+			}]
+		},
+		"method": {
+			"patterns": [{
+				"name": "support.function",
+				"match": "\\b(test|log)\\b"
+			}]
+		},
+		"variable": {
+			"patterns": [{
+				"name": "variable.name",
+				"match": "\\b(num|txt|a|b|c|d)\\b"
+			}]
+		},
+		"numbers": {
+			"patterns": [{
+				"name": "constant.numeric",
+				"match": "-?\\d(.\\d+)?"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.host",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.host",
+					"match": "\\\\."
+				}
+			]
+		},
+		"commentsBlock":{
+			"name": "comment.host",
+			"begin": "/\\*",
+			"end": "\\*/",
+			"patterns": [
+				{
+					"name": "constant.character.escape.host",
+					"match": "\\\\."
+				}
+			]
+		},
+		"comments":{
+			"name": "comment.host",
+			"begin": ";",
+			"end": "\n",
+			"patterns": [
+				{
+					"name": "constant.character.escape.host",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "text.host"
+}
