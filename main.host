@@ -1,2 +1,91 @@
+load 
+	"host/base"
+	"host/fs"
+	"host/lgpbi"
 
-runTests!
+; PowerBI paths
+var pbiSource   """C:\Users\mark_\Desktop\host.pbix"""
+var pbiDest     """C:\Users\mark_\Desktop\host_result.pbix"""
+var pbiDir      """C:\Users\mark_\Desktop\hostpbi"""
+var pbiLayout   """C:\Users\mark_\Desktop\hostpbi\Report\Layout"""
+
+; unzip PowerBI file
+unzipDir 
+	pbiSource 	
+	pbiDir 		
+
+; read in JSON
+read pbiLayout "ucs2"
+>> evalJs
+>>> var pbi 
+
+; make pages for slides
+patRows >> each r : r.Slide 
+>> unique 
+>> each slideNum 
+	; create section for slide
+    var slide : copy pbi.sections.0    
+    set slide.displayName : + "Slide " slideNum
+    set slide.slideNum slideNum
+    set slide.visualContainers.length 0
+>>> var slides
+
+; make charts for each row
+slides >> copy
+>> each slide
+    ; get rows for this page
+    var rows : filter patRows r 
+    	&& 
+    		== r.Slide slide.slideNum
+    		== r."Shape.Type" "Chart"
+			== r."Analysis.Type" "Pivot"
+    
+    var cnt -1
+    each rows r
+    	set cnt : + cnt 1
+    	var tmpl : copy pbi.sections.0.visualContainers.`cnt
+    	slide.visualContainers 
+    	>> push (makeChart tmpl r)
+    	break! ; TODO remove this just testing for now
+    slide
+>>> var slides2
+; TODO remove this, just testing first and second slide for now
+;set slides2.length 2
+
+;;; TESTING 
+patRows.0 >>> var r >> getGroupingCols 
+patRows.3 >>> var r >> getGroupingCols >>> var gCols
+slides2.0.visualContainers.0 >>> var tmpl
+var config : evalJs tmpl.config
+var dataTransforms : evalJs tmpl.dataTransforms
+var query : evalJs tmpl.query
+
+string.replace tmpl.config re/paidDispEver/g gCols.1 >> evalJs
+
+config
+
+patRows >> each r : getGroupingCols r 
+>> flatten >> compact >> unique
+replace
+; /TESTING ;;;
+
+; set new sections
+set pbi.sections slides2
+
+; write back to JSON
+toDataString pbi
+>>> writeFile pbiLayout "ucs2"
+
+; remove security
+var xmlFile """C:\Users\mark_\Desktop\hostpbi\[Content_Types].xml"""
+readFile xmlFile
+string.replace _ 
+	"""<Override PartName="/SecurityBindings" ContentType="" />"""
+	""
+writeFile xmlFile _
+
+; rezip file
+zipDir
+	pbiDir
+	pbiDest
+
